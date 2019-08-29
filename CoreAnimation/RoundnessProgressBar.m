@@ -21,14 +21,14 @@
 - (void)drawRect:(CGRect)rect
 {
 
-    CGFloat angle = M_PI/30;
+    CGFloat angle = M_PI/(_dialNumber?:30);
     CGFloat startAngle = M_PI*3/2;
-    for (NSInteger index=0; index<60; index=index+2) {
+    for (NSInteger index=0; index<(2*(_dialNumber?:30)); index=index+2) {
         UIBezierPath *path = [UIBezierPath bezierPath];
         [path addArcWithCenter:CGPointMake(100, 100) radius:90 startAngle:startAngle+index*angle endAngle:startAngle+(index+1)*angle clockwise:YES];
         CAShapeLayer *layer = [CAShapeLayer layer];
         layer.strokeColor = [UIColor lightGrayColor].CGColor;
-        layer.lineWidth = 15;
+        layer.lineWidth = _lineWidth?:15;
         layer.path = path.CGPath;
         [self.layer addSublayer:layer];
     }
@@ -41,7 +41,7 @@
         [layer removeFromSuperlayer];
     }
     CGFloat currentPercent = (percent*3)/5;
-    CGFloat angle = M_PI/30;
+    CGFloat angle = M_PI/(_dialNumber?:30);
     CGFloat startAngle = M_PI*3/2;
     for (NSInteger index=0; index<currentPercent; index=index+2) {
         UIBezierPath *path = [UIBezierPath bezierPath];
@@ -49,8 +49,8 @@
         CAShapeLayer *layer = [CAShapeLayer layer];
         layer.backgroundColor = [UIColor whiteColor].CGColor;
         layer.fillColor = [UIColor clearColor].CGColor;
-        layer.strokeColor = [UIColor cyanColor].CGColor;
-        layer.lineWidth = 15;
+        layer.strokeColor = (_progressRoundnessColor?:[UIColor cyanColor]).CGColor;
+        layer.lineWidth = _lineWidth?:15;
         layer.path = path.CGPath;
         layer.opacity = 0.0;
         [self.layerArr addObject:layer];
@@ -62,7 +62,12 @@
         animation.removedOnCompletion = NO;
         
         animation.fillMode = kCAFillModeForwards;
-        animation.beginTime = CACurrentMediaTime() + 0.05*index;
+        
+        CGFloat animationTimeInterval = 0.05;
+        if (self.timeInterval!=0) {
+            animationTimeInterval = self.timeInterval;
+        }
+        animation.beginTime = CACurrentMediaTime() + animationTimeInterval*index;
         [layer addAnimation:animation forKey:@"opacityAnimation"];
     }
 }
