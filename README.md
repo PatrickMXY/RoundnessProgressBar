@@ -5,4 +5,4 @@
 
 ![](https://github.com/PatrickMXY/RoundnessProgressBar/blob/master/roundnessProgressBar.gif)
 
-具体介绍可以参考 [](http://yangmengxing.cn)
+具体介绍可以参考 [博客链接](http://yangmengxing.cn)
