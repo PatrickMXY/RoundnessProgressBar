@@ -3,4 +3,4 @@
 
 一个可以改刻度的圆形进度条
 
-![](https://github.com/PatrickMXY/RoundnessProgressBar/roundnessProgressBar.gif)
+![](https://github.com/PatrickMXY/RoundnessProgressBar/blob/master/roundnessProgressBar.gif)
